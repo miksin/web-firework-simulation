@@ -1,5 +1,6 @@
 import Point from './Point';
 import Vector from './Vector';
+import { randInt } from '../utils/common';
 
 class Particle {
   constructor(p, v, a, r) {
@@ -8,7 +9,7 @@ class Particle {
     this.vel = new Vector(v.x, v.y);
     this.acc = new Vector(a.x, a.y);
     this.radius = r;
-    this.hue = Math.floor(Math.random() * 360);
+    this.hue = randInt(360);
     this.saturation = 100;
     this.lightness = 50;
     this.alpha = 0.5;

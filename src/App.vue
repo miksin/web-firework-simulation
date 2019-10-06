@@ -8,13 +8,20 @@
       v-on:change-coef="handleChangeCoef"
       v-on:reset-coef="handleResetCoef"
     />
+    <a
+      class="github-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://github.com/miksin/web-firework-simulation"
+    >
+      <img src="./assets/GitHub-Mark-Light-64px.png" alt="Github"/>
+    </a>
   </div>
 </template>
 
 <script>
 import NightSky from './components/NightSky.vue';
-import ControlPanel from './components/ControlPanel';
-import Vector from './models/Vector';
+import ControlPanel from './components/ControlPanel.vue';
 
 export default {
   name: 'app',
@@ -31,7 +38,7 @@ export default {
     defaultCoef() {
       return {
         gravity: 1,
-        emitVel: 40,
+        emitVel: 35,
         fragNum: 40,
       };
     },
@@ -49,6 +56,9 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,7 +68,22 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-body {
-  margin: 0;
+.github-link {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.github-link:hover {
+  opacity: 1.0;
+}
+.github-link > img {
+  width: 100%;
+  height: 100%;
 }
 </style>

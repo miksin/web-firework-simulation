@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import Vector from '../models/Vector';
 export default {
   props: {
     coefficients: Object,
@@ -65,7 +64,7 @@ export default {
       this.$emit('change-coef', key, parseFloat(e.target.value));
     },
   },
-}
+};
 </script>
 
 <style scoped>
