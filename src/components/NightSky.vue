@@ -44,7 +44,7 @@ export default {
 
       this.ctx.font = "24px Arial";
       this.ctx.fillStyle = "#FFF";
-      this.ctx.fillText("Mouse Click to fire", 10, 50);
+      this.ctx.fillText("Mouse click to fire", 10, 50);
 
       this.fireworks.forEach((f) => {
         f.draw(this.ctx);
