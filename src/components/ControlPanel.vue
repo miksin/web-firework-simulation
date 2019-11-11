@@ -1,6 +1,6 @@
 <template>
   <div class="control-panel">
-    <p class="item-title">gravity: {{ gravity }}</p>
+    <p class="item-title">gravity: {{ parseFloat(gravity).toFixed(2) }}</p>
     <input
       class="slider"
       type="range"
@@ -11,7 +11,7 @@
       @input.prevent="handleChangeCoef('gravity', $event)"
     />
     <div class="splitter"></div>
-    <p class="item-title">initial speed: {{ emitVel }}</p>
+    <p class="item-title">initial speed: {{ parseFloat(emitVel).toFixed(2) }}</p>
     <input
       class="slider"
       type="range"
@@ -31,6 +31,17 @@
       step="5"
       :value="fragNum"
       @input.prevent="handleChangeCoef('fragNum', $event)"
+    />
+    <div class="splitter"></div>
+    <p class="item-title">emitters: {{ numEmitter }}</p>
+    <input
+      class="slider"
+      type="range"
+      min="1"
+      max="10"
+      step="1"
+      :value="numEmitter"
+      @input.prevent="handleChangeCoef('numEmitter', $event)"
     />
     <div class="splitter"></div>
     <div class="splitter"></div>
@@ -58,6 +69,9 @@ export default {
     fragNum() {
       return this.coefficients.fragNum;
     },
+    numEmitter() {
+      return this.coefficients.numEmitter;
+    },
   },
   methods: {
     handleChangeCoef(key, e) {
@@ -77,6 +91,11 @@ export default {
   opacity: 0.7;
   border-radius: 5px;
 }
+
+.control-panel:hover {
+  opacity: 1;
+}
+
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -109,5 +128,12 @@ export default {
 }
 .reset-btn:hover {
   background-color: #8bc34a;
+}
+
+@media (max-width: 767px) {
+  .control-panel {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 </style>

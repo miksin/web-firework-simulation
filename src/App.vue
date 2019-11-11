@@ -2,6 +2,9 @@
   <div id="app">
     <night-sky
       :coefficients="coefficients"
+      :resizedTimes="resizedTimes"
+      :actionQueue="actionQueue"
+      @clearQueue="handleClearQueue"
     />
     <control-panel
       :coefficients="coefficients"
@@ -16,30 +19,40 @@
     >
       <img src="./assets/GitHub-Mark-Light-64px.png" alt="Github"/>
     </a>
+    <resize-observer @notify="handleResize"/>
   </div>
 </template>
 
 <script>
+import { ResizeObserver } from 'vue-resize';
 import NightSky from './components/NightSky.vue';
 import ControlPanel from './components/ControlPanel.vue';
+import { screenHeightRatio, mobileWidth, randActions } from './utils/common';
+import 'vue-resize/dist/vue-resize.css';
 
 export default {
   name: 'app',
   components: {
     NightSky,
     ControlPanel,
+    ResizeObserver,
   },
   data() {
     return {
-      coefficients: this.defaultCoef(),
+      coefficients: this.defaultCoef(screenHeightRatio()),
+      actionQueue: [],
+      resizeTimer: null,
+      resizedTimes: 0,
     };
   },
   methods: {
-    defaultCoef() {
+    defaultCoef(ratio = 1.0) {
+      const numEmitter = mobileWidth() ? 1 : 3;
       return {
-        gravity: 1,
-        emitVel: 35,
-        fragNum: 40,
+        gravity: 1 * ratio,
+        emitVel: 40 * ratio,
+        fragNum: 60 * ratio,
+        numEmitter,
       };
     },
     handleChangeCoef(key, value) {
@@ -49,8 +62,26 @@ export default {
       };
     },
     handleResetCoef() {
-      this.coefficients = this.defaultCoef();
+      this.coefficients = this.defaultCoef(screenHeightRatio());
     },
+    handleResize() {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        this.resizedTimes += 1;
+        this.coefficients = this.defaultCoef(screenHeightRatio());
+      }, 500);
+    },
+    handleEnqueue(actionList) {
+      this.actionQueue.push(...actionList);
+    },
+    handleClearQueue() {
+      this.actionQueue = [];
+    },
+  },
+  mounted() {
+    setInterval(() => {
+      randActions().then(r => this.handleEnqueue(r));
+    }, 1000);
   },
 };
 </script>
@@ -85,5 +116,13 @@ body {
 .github-link > img {
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 767px) {
+  .github-link {
+    top: 20px;
+    width: 30px;
+    height: 30px;
+  }
 }
 </style>
