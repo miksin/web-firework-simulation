@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: 'web-firework-simulation',
+  publicPath: process.env.PUBLIC_PATH || '',
 };

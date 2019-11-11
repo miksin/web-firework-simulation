@@ -9,18 +9,21 @@
     <meta property="og:title" content="Web Firework Simulation - Canvas-based interactive animation" />
     <meta property="og:description" content="Canvas-based interactive animation">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://miksin.github.io/web-firework-simulation/" />
+    <meta property="og:url" content="<%= VUE_APP_URL %>" />
 
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Web Firework Simulation</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145160002-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-145160002-1');
-    </script>
+
+    <% if (VUE_APP_GA !== undefined) { %>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=<%= VUE_APP_GA %>"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<%= VUE_APP_GA %>');
+      </script>
+    <% } %>
   </head>
   <body>
     <noscript>

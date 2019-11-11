@@ -30,7 +30,10 @@ class Firework {
       this.particles = [];
 
       for (let i = 0; i < this.fragNum; i += 1) {
-        const dir = Vector.fromPCS(randInt(this.emitVel.valueOf() - 15, this.emitVel.valueOf() - 30), randInt(0, 360));
+        const dir = Vector.fromPCS(
+          randInt(this.emitVel.valueOf() - 15, this.emitVel.valueOf() - 30),
+          randInt(0, 360),
+        );
         const p = new Particle(explodePos, dir, this.gravity, 2);
         this.particles.push(p);
       }
