@@ -10,10 +10,14 @@ export function screenHeightRatio(defaultHeight = 947) {
   return window.innerHeight / parseFloat(defaultHeight);
 }
 
-export async function randActions(floor = 0.6) {
+export async function randActions(max, floor = 0.6) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([{ ratio: Math.random() * (1.0 - floor) + floor }]);
+      const num = randInt(max, 1);
+      const actions = new Array(num).fill(0).map(() => ({
+        ratio: Math.random() * (1.0 - floor) + floor,
+      }));
+      resolve(actions);
     }, 0);
   });
 }

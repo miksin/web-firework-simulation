@@ -80,8 +80,9 @@ export default {
   },
   mounted() {
     setInterval(() => {
-      randActions().then(r => this.handleEnqueue(r));
-    }, 1000);
+      const { numEmitter } = this.coefficients;
+      randActions(numEmitter + 1).then(r => this.handleEnqueue(r));
+    }, 2000);
   },
 };
 </script>

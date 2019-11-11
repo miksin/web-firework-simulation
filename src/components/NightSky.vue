@@ -81,10 +81,7 @@ export default {
     handleResize() {
       this.canvasEl.width = this.canvasEl.parentElement.clientWidth;
       this.canvasEl.height = this.canvasEl.parentElement.clientHeight;
-      const positions = this.calEmitPositions();
-      for (let i = 0; i < this.numEmitter; i += 1) {
-        this.emitters[i].pos = positions[i];
-      }
+      this.setEmitter();
     },
   },
   mounted() {
